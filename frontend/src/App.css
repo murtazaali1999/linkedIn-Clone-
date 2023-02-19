@@ -1,0 +1,14 @@
+.App {
+  height: 2000px;
+  background-color: rgb(196, 196, 196);
+}
+
+.app_body {
+  display: flex;
+  flex-direction: row;
+}
+
+.app_body :nth-child(n) > div {
+  display: flex;
+  flex-direction: column;
+}

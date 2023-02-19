@@ -1,0 +1,35 @@
+.post {
+  background-color: white;
+  padding: 20px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+}
+
+.post-header {
+  display: flex;
+  flex-direction: row !important;
+}
+
+.post-body p {
+  margin-top: 10px !important;
+  margin-bottom: 15px !important;
+}
+
+.post-buttons {
+  display: flex;
+  flex-direction: row !important;
+}
+
+.temp-input-options {
+  display: flex !important;
+  flex-direction: row !important;
+
+  margin: 10px 10px 10px 25px;
+  color: gray;
+}
+
+.temp-input-options h4 {
+  margin-left: 8px;
+}
