@@ -1,5 +1,7 @@
-import React from 'react'
-import "./Header.css"
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "../features/userSlice";
+import { auth } from "../fb";
 
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from '@mui/icons-material/Home';
@@ -11,9 +13,35 @@ import AppsIcon from '@mui/icons-material/Apps';
 
 import NavIcons from "./NavIcons";
 import OImage from './OImage';
+import "./Header.css"
 
 
 const Header = () => {
+  const dispatch = useDispatch();
+  var user = useSelector(selectUser);
+
+  const image = useRef("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg");
+
+  useEffect(() => {
+    if (auth.currentUser != null)
+      setProfilePic()
+  }, [auth.currentUser])
+
+  const logOuting = () => {
+    dispatch(logout())/* logsout redux */
+    auth.signOut();/* firebase logout */
+    image.current = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg";
+  }
+
+  const setProfilePic = () => {
+    if (auth.currentUser) {
+      console.log("Setting Here");
+      image.current = user.photoUrL;
+    } else {
+      image.current = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg";
+    }
+  }
+
   return (
     <div className='header'>
 
@@ -30,14 +58,18 @@ const Header = () => {
 
       <div className="right-header">
 
-        <div className="nav-icons">
+        <div className="nav-icons" >
           <NavIcons title="Home" Icon={HomeIcon} />
           <NavIcons title="Jobs" Icon={WorkIcon} />
           <NavIcons title="My Network" Icon={PeopleAltIcon} />
           <NavIcons title="Messaging" Icon={MessageIcon} />
           <NavIcons title="Notifications" Icon={NotificationsIcon} />
-          <OImage uri="https://easydrawingguides.com/wp-content/uploads/2019/07/how-to-draw-darth-maul-from-star-wars-featured-image-1200.png" />
-
+          <div onClick={logOuting}>
+            <OImage
+              uri={image.current}
+              onClick={logOuting}
+            />
+          </div>
         </div>
 
         <div className="buttons-premium">
@@ -50,6 +82,5 @@ const Header = () => {
     </div>
   )
 }
-
 
 export default Header;

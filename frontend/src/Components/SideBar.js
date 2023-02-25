@@ -1,8 +1,29 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import OImage from './OImage'
 import "./Sidebar.css";
 
+import { selectUser } from "../features/userSlice"
+import { useSelector } from "react-redux"
+import { auth } from "../fb"
+
 const SideBar = () => {
+  const user = useSelector(selectUser);
+  const [mg, setImage] = useState("")
+
+  useEffect(() => {
+    setSideBarPicture();
+  }, [auth])
+
+  const setSideBarPicture = () => {
+    if (auth.currentUser) {
+      setImage(user.photoUrL);
+    } else {
+      setImage("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg");
+    }
+  }
+
+
 
 
   const recentItemHashed = (item) => {
@@ -14,14 +35,13 @@ const SideBar = () => {
     )
   }
 
-
   return (
     <div className='sidebar'>
       <div className="sidebar-top">
         <img className='back-img' src="https://www.teahub.io/photos/full/257-2579582_wallpaper-linear-orange-gradient-blue-dark-orange-medium.jpg" alt="not right now" />{/* background image */}
-        <OImage uri="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg" />
+        <OImage uri={mg} />
         <div className="intro">
-          <h2 >Murtaza Ali</h2>
+          <h2 >{user.displayName}</h2>
           <h6 className='full-gray'>MEVN/MERN DEV / Game Designer</h6>
         </div>
         <hr className='full-gray' />

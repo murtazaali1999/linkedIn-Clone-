@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import "./Post.css"
 
 import OImage from "./OImage";
@@ -10,7 +10,7 @@ import Share from "@mui/icons-material/Share";
 import Send from "@mui/icons-material/Send";
 
 
-const Post = ({ name, description, message, photoUrl }) => {
+const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
 
     const inputOptions = (Icon, title, color) =>
     (
@@ -21,7 +21,7 @@ const Post = ({ name, description, message, photoUrl }) => {
     )/* Custom Input Options */
 
     return (
-        <div className='post'>
+        <div className='post' ref={ref}>
             <div className="post-header">
 
                 <OImage uri="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-default-avatar-profile-icon-vector-social-media-user-image-vector-illustration-227787227.jpg" />
@@ -47,6 +47,6 @@ const Post = ({ name, description, message, photoUrl }) => {
 
         </div>
     )
-}
+})
 
 export default Post

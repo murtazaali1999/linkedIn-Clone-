@@ -1,3 +1,59 @@
 .widgets {
-  flex: 0.25;
+  margin-top: 10px;
+}
+
+.widgets-wrapper {
+  position: fixed;
+  background-color: white;
+
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.straight {
+  font-size: small;
+  font-weight: 200;
+  color: gray;
+
+  margin-left: 45px;
+}
+
+.widgets-header {
+  display: flex;
+
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: white;
+}
+
+.widgets-header h2 {
+  font-size: large;
+  font-weight: 600;
+}
+
+.widgets-articles {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.widgets-articles:hover {
+  background-color: rgb(209, 209, 209);
+}
+
+.widget-article {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.mm {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.blue-dot {
+  color: rgb(47, 47, 236);
+  width: 20px;
+  height: 20px;
 }

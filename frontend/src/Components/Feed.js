@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, forwardRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import FlipMove from "react-flip-move"
 import "./Feed.css"
 
 import CreateIcon from "@mui/icons-material/Create";
@@ -10,13 +12,18 @@ import ArticleIcon from "@mui/icons-material/Article";
 import InputOptions from "./InputOptions";
 import Post from './Post';
 
-import { db, auth, } from "../fb";
 
-import { getDoc, doc, addDoc, collection, setDoc, getDocs } from "firebase/firestore";
+import { db, auth, } from "../fb";
+import { selectUser } from "../features/userSlice"
+import { addDoc, collection, getDocs, } from "firebase/firestore";
 
 const Feed = () => {
     const [posts, setPosts] = useState([]);
     const [message, setMessage] = useState("");
+
+    const dispatch = useDispatch();/* to launch dispatch functions */
+    const user = useSelector(selectUser); /* to select user context */
+
 
     useEffect(() => {
         //gets all the posts
@@ -34,16 +41,21 @@ const Feed = () => {
     const sendPost = async (e) => {
         e.preventDefault();
 
-        await addDoc(collection(db, "posts"), {
-            name: "Murtaza Ali",
-            description: "Test Description",
-            message: message,
-            photoUrl: " ",
-            timeStamp: Date.now()
-        })
+        if (auth.currentUser) {
 
-        setMessage("");
-        setPosts([]); /* for refetching */
+            console.log(user.displayName, user.email, user.photoUrL);
+
+            await addDoc(collection(db, "posts"), {
+                name: user.displayName,
+                description: user.email,
+                message: message,
+                photoUrl: user.photoUrL || "",
+                timeStamp: Date.now()
+            })
+
+            setMessage("");
+            setPosts([]); /* for refetching */
+        }
     }
 
     return (
@@ -67,18 +79,22 @@ const Feed = () => {
             </div>
 
             <div className="posts">
-                {
-                    posts?.map(({ id, data: { name, description, message, photoUrl } }) => (
-                        <Post
-                            key={id}
-                            name={name}
-                            description={description}
-                            message={message}
-                            photoUrl={photoUrl}
-                        />
-                    )
-                    )
-                }
+                <FlipMove>
+                    {
+                        posts?.map(({ id, data: { name, description, message, photoUrl } }) => (
+
+                            <Post
+                                key={id}
+                                name={name}
+                                description={description}
+                                message={message}
+                                photoUrl={photoUrl}
+                            />
+
+                        )
+                        )
+                    }
+                </FlipMove>
             </div>
 
         </div>

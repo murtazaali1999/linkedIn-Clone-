@@ -1,5 +1,5 @@
 .App {
-  height: 2000px;
+  height: 3000px;
   background-color: rgb(196, 196, 196);
 }
 
@@ -11,4 +11,8 @@
 .app_body :nth-child(n) > div {
   display: flex;
   flex-direction: column;
+}
+
+.app_body :nth-child(3) > div {
+  margin-right: 10px;
 }

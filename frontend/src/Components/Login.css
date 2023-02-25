@@ -1,0 +1,66 @@
+.login {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 100px;
+}
+
+.register {
+  color: #0074b1;
+}
+
+.member {
+  margin-top: 10px;
+}
+
+.link-form {
+  display: flex;
+  flex-direction: column !important;
+
+  width: 280px;
+  margin-top: 20px;
+}
+
+.link-form input {
+  margin-bottom: 20px;
+  padding: 10px;
+
+  height: 50px;
+  border-radius: 8px;
+  border: solid 1px black;
+}
+
+.link-form button {
+  margin-top: 10x !important;
+  margin-bottom: 10px;
+
+  height: 50px;
+
+  border-radius: 8px;
+
+  background-color: #0074b1;
+
+  color: white;
+  border: solid 1px black;
+}
+
+.link-form input[type="text"] {
+  border-radius: 8px;
+  border: solid 1px black;
+
+  width: 280px;
+  height: 50px;
+
+  margin-top: 10x;
+
+  margin-bottom: 10px;
+}
+
+.linkedin-logo {
+  width: 180px;
+  height: 50px;
+}
